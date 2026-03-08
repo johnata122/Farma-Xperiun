@@ -1,0 +1,69 @@
+table dfornecedor
+	lineageTag: 68acc77c-0c14-4674-81f6-87b59bc4db07
+
+	column fornecedor_id
+		dataType: double
+		lineageTag: 2ba9fd9f-c811-4c49-bd9b-7ab91918f5ae
+		summarizeBy: none
+		sourceColumn: fornecedor_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nome
+		dataType: string
+		lineageTag: 8a3e358d-7abf-4bc8-b934-4aca0c464f4d
+		summarizeBy: none
+		sourceColumn: nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column cidade
+		dataType: string
+		lineageTag: efe92a5e-53b5-4073-ab8f-0cd75b45835f
+		summarizeBy: none
+		sourceColumn: cidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado
+		dataType: string
+		lineageTag: 9802ac80-6fff-481f-b4f2-04a652a7c705
+		summarizeBy: none
+		sourceColumn: estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column regiao
+		dataType: string
+		lineageTag: c024643d-7e5a-47b3-bd07-28ea445e085c
+		summarizeBy: none
+		sourceColumn: regiao
+
+		annotation SummarizationSetBy = Automatic
+
+	column prazo_entrega_dias
+		dataType: double
+		lineageTag: 940c87ff-76a8-420e-b5b5-60c239dc4919
+		summarizeBy: none
+		sourceColumn: prazo_entrega_dias
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dfornecedor = m
+		mode: import
+		source =
+				let
+				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
+				    d_fornecedor_Table = Fonte{[Name="d_fornecedor",Kind="Table"]}[Data],
+				    #"Outras Colunas Removidas" = Table.SelectColumns(d_fornecedor_Table,{"fornecedor_id", "nome", "cidade", "estado", "regiao", "prazo_entrega_dias"})
+				in
+				    #"Outras Colunas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

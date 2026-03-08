@@ -1,0 +1,51 @@
+table dmeta
+	lineageTag: 481002f3-f1de-4d8c-a1d0-ce8f4d9eba4c
+
+	column data
+		dataType: string
+		lineageTag: 16775e57-8e69-4d5b-b55f-1873a93dd468
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_receita
+		dataType: double
+		lineageTag: 930fc8a2-dc17-45a2-ba8e-463d881e175d
+		summarizeBy: sum
+		sourceColumn: meta_receita
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column meta_quantidade
+		dataType: double
+		lineageTag: 9a0f7351-3e8d-4bb5-bb96-fe004fdd3dfe
+		summarizeBy: sum
+		sourceColumn: meta_quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AnoMes = (YEAR(dmeta[data]) * 100) + MONTH(dmeta[data])
+		formatString: 0
+		lineageTag: 1bf6e674-7b56-4f64-b714-bdebfe7a7bb2
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dmeta = m
+		mode: import
+		source =
+				let
+				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
+				    vw_meta_View = Fonte{[Name="vw_meta",Kind="View"]}[Data]
+				in
+				    vw_meta_View
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

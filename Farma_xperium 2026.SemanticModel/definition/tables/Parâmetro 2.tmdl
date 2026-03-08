@@ -1,0 +1,48 @@
+table 'Parâmetro 2'
+	lineageTag: 14da700a-9f53-4be6-9ff7-e053d31dde45
+
+	column Parâmetro
+		lineageTag: cc007f19-1568-4b2e-b7c3-88d1adf1f94c
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâmetro Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâmetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Campos'
+		isHidden
+		lineageTag: 1bad35e2-9052-4ebd-8eb7-6c0f12123726
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâmetro Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 08df77bb-d924-430a-94e1-cff6ff54aca2
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parâmetro 2' = calculated
+		mode: import
+		source =
+				{
+				    ("categoria", NAMEOF('dproduto'[categoria]), 0),
+				    ("nome_produto", NAMEOF('dproduto'[nome_produto]), 1)
+				}
+
+	annotation PBI_Id = a5bba889159d4555a319e8f42d00af19
+

@@ -1,0 +1,49 @@
+table Parâmetro
+	lineageTag: 5d477add-3dbd-4043-9a7f-d236d2949410
+
+	column Parâmetro
+		lineageTag: 0245068e-542d-4af9-b95b-fb642f1571db
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâmetro Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâmetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Campos'
+		isHidden
+		lineageTag: 5a1e2740-3cb5-470b-a9db-414141562420
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâmetro Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 2f638765-0101-4693-8251-a1bc79881921
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parâmetro = calculated
+		mode: import
+		source =
+				{
+				    ("Receita Bruta", NAMEOF('_Medidas'[Receita Bruta]), 0),
+				    ("Lucro T.", NAMEOF('_Medidas'[Lucro T.]), 1),
+				    ("Margem %", NAMEOF('_Medidas'[Margem %]), 2)
+				}
+
+	annotation PBI_Id = 88811b525ea7421dbdc25dbc75b98d32
+

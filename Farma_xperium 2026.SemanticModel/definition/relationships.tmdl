@@ -1,0 +1,21 @@
+relationship AutoDetected_1b92389f-2da7-4e31-b9fe-73841f796a51
+	fromColumn: fvendas.data
+	toColumn: dcalendario.data
+
+relationship AutoDetected_c0f6199f-f7c7-4838-acea-51a32a7de748
+	fromColumn: fvendas.fornecedor_id
+	toColumn: dfornecedor.fornecedor_id
+
+relationship AutoDetected_4f960d27-bf74-4f85-9d61-697ab89c5b64
+	fromColumn: fvendas.produto_id
+	toColumn: dproduto.produto_id
+
+relationship AutoDetected_1bb7f9bd-4ab2-4be0-85a3-8b76f3dcc77c
+	fromColumn: fvendas.turno_id
+	toColumn: dturno.turno_id
+
+relationship 2f7aa8d7-fa2a-4072-93fd-503a2d076e2b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dcalendario.data
+	toColumn: LocalDateTable_f22bf9dc-db5a-4128-91e5-e49a1348d657.Date
+

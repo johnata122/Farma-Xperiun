@@ -1,0 +1,55 @@
+table dturno
+	lineageTag: df52d5ad-a69a-4e94-adf5-a9996cf5bdb2
+
+	column turno_id
+		dataType: double
+		lineageTag: 68532887-e5df-4a96-99c8-fd56de589d1d
+		summarizeBy: none
+		sourceColumn: turno_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nome_turno
+		dataType: string
+		lineageTag: b18abc3c-19e4-4d69-b91e-df0cdc90c74f
+		summarizeBy: none
+		sourceColumn: nome_turno
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora_inicio
+		dataType: double
+		lineageTag: fc627b32-2cb3-48f1-a9fa-dd4d1532805a
+		summarizeBy: none
+		sourceColumn: hora_inicio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column hora_fim
+		dataType: double
+		lineageTag: 9d1bd7cc-61c3-4554-bfda-c370179667a2
+		summarizeBy: none
+		sourceColumn: hora_fim
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dturno = m
+		mode: import
+		source =
+				let
+				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
+				    d_turno_Table = Fonte{[Name="d_turno",Kind="Table"]}[Data],
+				    #"Outras Colunas Removidas" = Table.SelectColumns(d_turno_Table,{"turno_id", "nome_turno", "hora_inicio", "hora_fim"})
+				in
+				    #"Outras Colunas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

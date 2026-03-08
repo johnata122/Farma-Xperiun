@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "01650f9e2c07c38d0a5e",
+  "position": {
+    "x": 752,
+    "y": 0,
+    "z": 3000,
+    "height": 64,
+    "width": 160,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dcalendario"
+                    }
+                  },
+                  "Property": "nome_dia_semana"
+                }
+              },
+              "queryRef": "dcalendario.nome_dia_semana",
+              "nativeQueryRef": "Dia da Semana",
+              "active": true,
+              "displayName": "Dia da Semana"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "numericStart": {
+              "expr": {
+                "Literal": {
+                  "Value": "2014.194157269284D"
+                }
+              }
+            },
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

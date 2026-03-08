@@ -1,0 +1,80 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "b1a95e6fc1664937972e",
+  "position": {
+    "x": 336,
+    "y": 144,
+    "z": 0,
+    "height": 383.99999999999994,
+    "width": 544,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dcalendario"
+                    }
+                  },
+                  "Property": "Mês Abrev."
+                }
+              },
+              "queryRef": "dcalendario.Mês Abrev.",
+              "nativeQueryRef": "Mês Abrev."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Meta da Receita"
+                }
+              },
+              "queryRef": "_Medidas.Meta da Receita",
+              "nativeQueryRef": "Meta da Receita"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Meta da Receita - Fix"
+                }
+              },
+              "queryRef": "_Medidas.Meta da Receita - Fix",
+              "nativeQueryRef": "Meta da Receita - Fix"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Receita liquida"
+                }
+              },
+              "queryRef": "_Medidas.Receita liquida",
+              "nativeQueryRef": "Receita liquida"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

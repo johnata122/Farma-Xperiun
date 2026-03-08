@@ -1,0 +1,148 @@
+table dcalendario
+	lineageTag: a8153f62-20a5-4cb0-95ed-bc2a526c946e
+
+	column data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1bc69222-fc2e-4d8b-b8f9-ebd061e8bd77
+		summarizeBy: none
+		sourceColumn: data
+
+		variation Variation
+			isDefault
+			relationship: 2f7aa8d7-fa2a-4072-93fd-503a2d076e2b
+			defaultHierarchy: LocalDateTable_f22bf9dc-db5a-4128-91e5-e49a1348d657.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ano
+		dataType: double
+		formatString: 0
+		lineageTag: 3d4cb08b-9ffb-45a3-be83-61657ede68a7
+		summarizeBy: sum
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column mes
+		dataType: double
+		lineageTag: 45667ff4-4188-4ea1-8769-1c0ae357aa57
+		summarizeBy: sum
+		sourceColumn: mes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nome_mes
+		dataType: string
+		lineageTag: 8b495f45-5af6-40f0-9964-e9f79be91af5
+		summarizeBy: none
+		sourceColumn: nome_mes
+		sortByColumn: mes
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column trimestre
+		dataType: double
+		lineageTag: cb877efb-3c2c-47df-b3fd-5329786613d3
+		summarizeBy: sum
+		sourceColumn: trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column semestre
+		dataType: double
+		lineageTag: f03027ed-326d-4f5f-b31d-19691d872ebf
+		summarizeBy: sum
+		sourceColumn: semestre
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dia_semana
+		dataType: double
+		lineageTag: 15a1b73c-392f-4713-9c09-0bf9f1b3e621
+		summarizeBy: sum
+		sourceColumn: dia_semana
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nome_dia_semana
+		dataType: string
+		lineageTag: 5ddcd1d9-4a1f-4145-8feb-c88eacfc2e1c
+		summarizeBy: none
+		sourceColumn: nome_dia_semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_fim_semana
+		dataType: double
+		lineageTag: 8631553d-8f6c-432a-b50a-6eabbdbbe2db
+		summarizeBy: sum
+		sourceColumn: is_fim_semana
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_feriado
+		dataType: double
+		lineageTag: 11fe2718-2691-4b80-b695-11a45cc0e399
+		summarizeBy: sum
+		sourceColumn: is_feriado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Mês Abrev.'
+		dataType: string
+		lineageTag: a43b64b3-0b88-45ef-96a8-c21db64003ef
+		summarizeBy: none
+		sourceColumn: Mês Abrev.
+		sortByColumn: mes
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoMes = (dcalendario[ano] * 100) + dcalendario[mes]
+		dataType: int64
+		lineageTag: b78d4199-5063-4290-af9c-2fe7733c19a2
+		summarizeBy: sum
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dcalendario = m
+		mode: import
+		source =
+				let
+				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
+				    d_calendario_Table = Fonte{[Name="d_calendario",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(d_calendario_Table,{{"data", type date}}),
+				    #"Primeiros Caracteres Inseridos" = Table.AddColumn(#"Tipo Alterado", "Mês Abrev.", each Text.Start([nome_mes], 3), type text),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Primeiros Caracteres Inseridos", each true),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Linhas Filtradas",{"data", "ano", "mes", "nome_mes", "trimestre", "semestre", "dia_semana", "nome_dia_semana", "is_fim_semana", "is_feriado", "Mês Abrev."})
+				in
+				    #"Outras Colunas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

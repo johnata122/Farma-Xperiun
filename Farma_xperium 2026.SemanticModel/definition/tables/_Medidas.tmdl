@@ -1,0 +1,598 @@
+table _Medidas
+	lineageTag: 99bf2a32-4bef-42a3-8b0c-3cffffc4f212
+
+	measure 'Custo Total' = SUM(fvendas[custo_total])
+		displayFolder: 1. Principais
+		lineageTag: 9a5b3095-d98e-4aa2-98f5-5880e434a6d3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Lucro T.' = [Receita liquida]-[Custo Total]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 1. Principais
+		lineageTag: d8117a71-9875-4bb1-b989-1800d3a17b6c
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Qtde Vendas' = DISTINCTCOUNT(fvendas[venda_id])
+		formatString: #,0.000
+		displayFolder: 1. Principais
+		lineageTag: 1f264c56-e794-46fd-8056-223a5c7eb819
+
+	measure 'Receita Bruta' = sumx(fvendas,fvendas[quantidade]*fvendas[preco_unitario])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 1. Principais
+		lineageTag: 8294750f-24bc-4781-add5-a6a9e8cc1c65
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Receita liquida' = [Receita Bruta]-sumx(fvendas,fvendas[desconto])
+		displayFolder: 1. Principais
+		lineageTag: 3d09827e-b0dc-422f-b870-d0bd1abcbf78
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ticket Médio' = DIVIDE([Receita Bruta],DISTINCTCOUNT(fvendas[venda_id]),0)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 1. Principais
+		lineageTag: 6824bc8b-8c4d-46ef-be71-50380b5ccaf3
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Margem %' = DIVIDE([Lucro T.], [Receita liquida],0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 1. Principais
+		lineageTag: 125afb8e-ac7d-48e8-9866-a83956a60bf4
+
+	measure 'Meta da Receita' =
+			
+			CALCULATE(
+			    SUM(dmeta[meta_receita])
+			)
+		displayFolder: 2. Metas
+		lineageTag: 648d724c-c6cb-419e-9ede-59c581e0fb45
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Meta da Qtde' = SUM(dmeta[meta_quantidade])
+		displayFolder: 2. Metas
+		lineageTag: 0b5203de-254a-4730-951c-0f410b7b377b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Atingimento % Meta Rec.' = DIVIDE([Receita liquida],[Meta da Receita - Fix],0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 1. Principais
+		lineageTag: 30bb39be-bb1b-45eb-b59b-c92b9fcecda1
+
+	measure 'Faturamento Bruto Formatado' =
+			
+			VAR vValor = [Receita Bruta]
+			RETURN
+			SWITCH(
+			    true(),
+			    vValor >= 1000000000, FORMAT(vValor,"0,0,,,.0 B"),
+			    vValor >= 1000000., FORMAT(vValor, "0,0,,.0 M"),
+			    vValor >= 1000., FORMAT(vValor, "0,0,.0 k"),
+			    FORMAT(vValor, "0")
+			)
+		displayFolder: 1. Principais
+		lineageTag: 286184b8-b643-4019-9d22-0af6bc796e8e
+
+	measure 'YOY Receita bruta %' = ```
+			
+			VAR Valor_last_year = [Receita Bruta LY]
+			
+			RETURN 
+			    DIVIDE(
+			        [Receita Bruta] - Valor_last_year,
+			        Valor_last_year
+			    )
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 3. Temporais
+		lineageTag: 3e50e6a3-9e62-400b-8a05-d7706199b424
+
+	measure 'imagem Var Receita Bruta' = ```
+			
+			
+			Var vValor = [YOY Receita bruta %]
+			Var vValor_Formatado = FORMAT(vValor + 0,"+0.0%;-0.0%;-")
+			
+			Var vSeta = SWITCH(
+			    TRUE(),
+			    vValor > 0, "▲",
+			    vValor < 0, "▼")
+			
+			Var vCor = SWITCH(
+			    TRUE(),
+			    vValor> 0, "#55af3b",
+			    vValor < 0,"#D16961",
+			    "#fff")
+			
+			
+			RETURN
+			
+			
+			 "data:image/svg+xml,
+			
+			 <svg width='180' height='50' viewBox='0 0 180 50' fill='none' xmlns='http://www.w3.org/2000/svg'>
+			   <g id='Cart&#195;&#163;o Var'>
+			      <g clip-path='url(#clip0_29108_274)'>
+			         <rect width='180' height='50' rx='5' fill='#EEF0F1'/>
+			
+			         <text id='rot_cat' fill='#263238'
+			
+			          xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='14' letter-spacing='0em'>
+			
+			            <tspan x='81' y='44.3413'>Vs Ano Anterior</tspan>
+			         </text>
+			
+			         <text id='rot_dados'
+			          opacity='0.5' fill='"&vCor&"' fill-opacity='0.89' xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='17' font-weight='bold' letter-spacing='0em'>
+			            <tspan x='82' y='27.3447'>    "&vValor_Formatado&"    </tspan>
+			         </text>
+			
+			         <text id='seta' 
+			         
+			         opacity='0.5' fill='"&vCor&"' xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='20' font-weight='bold' letter-spacing='0em'>
+			            <tspan x='42' y='37.1770'>   "&vSeta&"    </tspan>
+			         </text>
+			      </g>
+			   </g>
+			   <defs>
+			      <clipPath id='clip0_29108_274'>
+			         <rect width='180' height='50' rx='5' fill='white'/>
+			      </clipPath>
+			   </defs>
+			</svg>"
+			```
+		displayFolder: 4. Auxiliares
+		lineageTag: 40550cf2-6c8e-4a55-8c94-3039d8b5b514
+
+	measure 'Receita Bruta LY' = CALCULATE([Receita Bruta],SAMEPERIODLASTYEAR(dcalendario[data]))
+		displayFolder: 3. Temporais
+		lineageTag: 807b8f89-08b7-4c24-b664-cae9e134e0bf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Meta da Receita - Fix' =
+			
+			VAR MesAnoSelecionado = SELECTEDVALUE(dcalendario[AnoMes])
+			RETURN
+			CALCULATE(
+			     SUM(dmeta[meta_receita]),
+			      dmeta[AnoMes] = MesAnoSelecionado)
+		displayFolder: 2. Metas
+		lineageTag: 104b163d-0f3f-44a0-a633-0abe48ffd3b0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Receita Liquida LY' = CALCULATE([Receita liquida],SAMEPERIODLASTYEAR(dcalendario[data]))
+		displayFolder: 3. Temporais
+		lineageTag: f0c0069f-16f7-4722-92d5-8fc62391d4d0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY Receita Liquida %' = ```
+			
+			VAR Valor_last_year = [Receita Liquida LY]
+			
+			RETURN 
+			    DIVIDE(
+			        [Receita liquida] - Valor_last_year,
+			        Valor_last_year
+			    )
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 3. Temporais
+		lineageTag: b6e42954-e934-42fc-aa31-e9564a03b539
+
+	measure 'Lucro Total LY' = CALCULATE([Lucro T.],SAMEPERIODLASTYEAR(dcalendario[data]))
+		displayFolder: 3. Temporais
+		lineageTag: 30c1f44c-355d-4ed7-a4b3-5d1d71cb2de5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY Lucro Total %' = ```
+			
+			VAR Valor_last_year = [Lucro Total LY]
+			
+			RETURN 
+			    DIVIDE(
+			        [Lucro T.] - Valor_last_year,
+			        Valor_last_year
+			    )
+			```
+		displayFolder: 3. Temporais
+		lineageTag: 9c745405-274c-4c22-8e6e-f2f41fb62146
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Qtde Vendas LY' = CALCULATE([Qtde Vendas],SAMEPERIODLASTYEAR(dcalendario[data]))
+		formatString: 0
+		displayFolder: 3. Temporais
+		lineageTag: 3899a9c3-b5e0-449e-93cc-4024fc3d124f
+
+	measure 'YOY Qtde Vendas %' = ```
+			
+			VAR Valor_last_year = [Qtde Vendas LY]
+			
+			RETURN 
+			    DIVIDE(
+			        [Qtde Vendas] - Valor_last_year,
+			        Valor_last_year
+			    )
+			```
+		displayFolder: 3. Temporais
+		lineageTag: 82e2987b-330f-4b1d-816e-d6ca39382dd7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'imagem Var Receita Liquida' = ```
+			
+			
+			Var vValor = [YOY Receita Liquida %]
+			Var vValor_Formatado = FORMAT(vValor + 0,"+0.0%;-0.0%;-")
+			
+			Var vSeta = SWITCH(
+			    TRUE(),
+			    vValor > 0, "▲",
+			    vValor < 0, "▼")
+			
+			Var vCor = SWITCH(
+			    TRUE(),
+			    vValor> 0, "#55af3b",
+			    vValor < 0,"#D16961",
+			    "#fff")
+			
+			
+			RETURN
+			
+			
+			 "data:image/svg+xml,
+			
+			 <svg width='180' height='50' viewBox='0 0 180 50' fill='none' xmlns='http://www.w3.org/2000/svg'>
+			   <g id='Cart&#195;&#163;o Var'>
+			      <g clip-path='url(#clip0_29108_274)'>
+			         <rect width='180' height='50' rx='5' fill='#EEF0F1'/>
+			
+			         <text id='rot_cat' fill='#263238'
+			
+			          xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='14' letter-spacing='0em'>
+			
+			            <tspan x='81' y='44.3413'>Vs Ano Anterior</tspan>
+			         </text>
+			
+			         <text id='rot_dados'
+			          opacity='0.5' fill='"&vCor&"' fill-opacity='0.89' xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='17' font-weight='bold' letter-spacing='0em'>
+			            <tspan x='82' y='27.3447'>    "&vValor_Formatado&"    </tspan>
+			         </text>
+			
+			         <text id='seta' 
+			         
+			         opacity='0.5' fill='"&vCor&"' xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='20' font-weight='bold' letter-spacing='0em'>
+			            <tspan x='42' y='37.1770'>   "&vSeta&"    </tspan>
+			         </text>
+			      </g>
+			   </g>
+			   <defs>
+			      <clipPath id='clip0_29108_274'>
+			         <rect width='180' height='50' rx='5' fill='white'/>
+			      </clipPath>
+			   </defs>
+			</svg>"
+			```
+		displayFolder: 4. Auxiliares
+		lineageTag: 330dadb7-3155-4eff-9a73-1b9f96df92be
+
+	measure 'imagem Var Lucro Total' = ```
+			
+			
+			Var vValor = [YOY Lucro Total %]
+			Var vValor_Formatado = FORMAT(vValor + 0,"+0.0%;-0.0%;-")
+			
+			Var vSeta = SWITCH(
+			    TRUE(),
+			    vValor > 0, "▲",
+			    vValor < 0, "▼")
+			
+			Var vCor = SWITCH(
+			    TRUE(),
+			    vValor> 0, "#55af3b",
+			    vValor < 0,"#D16961",
+			    "#fff")
+			
+			
+			RETURN
+			
+			
+			 "data:image/svg+xml,
+			
+			 <svg width='180' height='50' viewBox='0 0 180 50' fill='none' xmlns='http://www.w3.org/2000/svg'>
+			   <g id='Cart&#195;&#163;o Var'>
+			      <g clip-path='url(#clip0_29108_274)'>
+			         <rect width='180' height='50' rx='5' fill='#EEF0F1'/>
+			
+			         <text id='rot_cat' fill='#263238'
+			
+			          xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='14' letter-spacing='0em'>
+			
+			            <tspan x='81' y='44.3413'>Vs Ano Anterior</tspan>
+			         </text>
+			
+			         <text id='rot_dados'
+			          opacity='0.5' fill='"&vCor&"' fill-opacity='0.89' xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='17' font-weight='bold' letter-spacing='0em'>
+			            <tspan x='82' y='27.3447'>    "&vValor_Formatado&"    </tspan>
+			         </text>
+			
+			         <text id='seta' 
+			         
+			         opacity='0.5' fill='"&vCor&"' xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='20' font-weight='bold' letter-spacing='0em'>
+			            <tspan x='42' y='37.1770'>   "&vSeta&"    </tspan>
+			         </text>
+			      </g>
+			   </g>
+			   <defs>
+			      <clipPath id='clip0_29108_274'>
+			         <rect width='180' height='50' rx='5' fill='white'/>
+			      </clipPath>
+			   </defs>
+			</svg>"
+			```
+		displayFolder: 4. Auxiliares
+		lineageTag: 671bd1b2-c441-4964-b9f3-7a3b35622369
+
+	measure 'imagem Var Qtde de Vendas Total' = ```
+			
+			
+			Var vValor = [YOY Qtde Vendas %]
+			Var vValor_Formatado = FORMAT(vValor + 0,"+0.0%;-0.0%;-")
+			
+			Var vSeta = SWITCH(
+			    TRUE(),
+			    vValor > 0, "▲",
+			    vValor < 0, "▼")
+			
+			Var vCor = SWITCH(
+			    TRUE(),
+			    vValor> 0, "#55af3b",
+			    vValor < 0,"#D16961",
+			    "#fff")
+			
+			
+			RETURN
+			
+			
+			 "data:image/svg+xml,
+			
+			 <svg width='180' height='50' viewBox='0 0 180 50' fill='none' xmlns='http://www.w3.org/2000/svg'>
+			   <g id='Cart&#195;&#163;o Var'>
+			      <g clip-path='url(#clip0_29108_274)'>
+			         <rect width='180' height='50' rx='5' fill='#EEF0F1'/>
+			
+			         <text id='rot_cat' fill='#263238'
+			
+			          xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='14' letter-spacing='0em'>
+			
+			            <tspan x='81' y='44.3413'>Vs Ano Anterior</tspan>
+			         </text>
+			
+			         <text id='rot_dados'
+			          opacity='0.5' fill='"&vCor&"' fill-opacity='0.89' xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='17' font-weight='bold' letter-spacing='0em'>
+			            <tspan x='82' y='27.3447'>    "&vValor_Formatado&"    </tspan>
+			         </text>
+			
+			         <text id='seta' 
+			         
+			         opacity='0.5' fill='"&vCor&"' xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='20' font-weight='bold' letter-spacing='0em'>
+			            <tspan x='42' y='37.1770'>   "&vSeta&"    </tspan>
+			         </text>
+			      </g>
+			   </g>
+			   <defs>
+			      <clipPath id='clip0_29108_274'>
+			         <rect width='180' height='50' rx='5' fill='white'/>
+			      </clipPath>
+			   </defs>
+			</svg>"
+			```
+		displayFolder: 4. Auxiliares
+		lineageTag: 649f8680-cb83-4ac7-a265-833402090779
+
+	measure 'Meses Meta Batida' = ```
+			
+			COUNTROWS(
+			    FILTER(
+			        VALUES(dcalendario[AnoMes]),
+			        CALCULATE(
+			            [Receita Bruta] >= [Meta da Receita] 
+			            && NOT(ISBLANK([Meta da Receita]))
+			        )
+			    )
+			)
+			```
+		formatString: 0
+		displayFolder: 2. Metas
+		lineageTag: 73a375d6-a8aa-4ba6-9916-f9cc56b698fd
+
+	measure 'Variância Absoluta' = [Receita Bruta] - [Meta da Receita]
+		displayFolder: 2. Metas
+		lineageTag: cc576877-798a-4b43-a1bc-56c38c593dcb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Variância %' = DIVIDE([Variância Absoluta], [Meta da Receita], 0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 2. Metas
+		lineageTag: 620b6f99-0d8f-4ed7-b273-ed56472f3c8c
+
+	measure 'Receita YTD' =
+			
+			TOTALYTD(
+			    [Receita liquida],
+			    dcalendario[data]
+			)
+		displayFolder: 1. Principais
+		lineageTag: 2a3b730c-023c-4527-bb53-b87f574223cc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Meta YTD' =
+			
+			TOTALYTD(
+			    [Meta da Receita],
+			    dcalendario[data]
+			)
+		displayFolder: 2. Metas
+		lineageTag: 0e432fa9-a8e9-4edb-81d0-1a59c7d5fd7b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Atingimento YTD %' =
+			
+			DIVIDE([Receita YTD], [Meta YTD])
+		displayFolder: 2. Metas
+		lineageTag: 012f783a-ccfe-4f06-8d16-a4e6dc88e8ba
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Ticket Médio LY' = CALCULATE([Ticket Médio],SAMEPERIODLASTYEAR(dcalendario[data]))
+		displayFolder: 3. Temporais
+		lineageTag: 3957e673-8323-42cd-8dfe-024bf116ade7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YOY Ticket Médio %' = ```
+			
+			VAR Valor_last_year = [Ticket Médio LY]
+			
+			RETURN 
+			    DIVIDE(
+			        [Ticket Médio] - Valor_last_year,
+			        Valor_last_year
+			    )
+			```
+		displayFolder: 3. Temporais
+		lineageTag: 7b2258f4-b6dc-4db8-a8dd-e956ac0b8b2c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'imagem Var YoY T.M Total' = ```
+			
+			
+			Var vValor = [YOY Ticket Médio %]
+			Var vValor_Formatado = FORMAT(vValor + 0,"+0.0%;-0.0%;-")
+			
+			Var vSeta = SWITCH(
+			    TRUE(),
+			    vValor > 0, "▲",
+			    vValor < 0, "▼")
+			
+			Var vCor = SWITCH(
+			    TRUE(),
+			    vValor> 0, "#55af3b",
+			    vValor < 0,"#D16961",
+			    "#fff")
+			
+			
+			RETURN
+			
+			
+			 "data:image/svg+xml,
+			
+			 <svg width='180' height='50' viewBox='0 0 180 50' fill='none' xmlns='http://www.w3.org/2000/svg'>
+			   <g id='Cart&#195;&#163;o Var'>
+			      <g clip-path='url(#clip0_29108_274)'>
+			         <rect width='180' height='50' rx='5' fill='#EEF0F1'/>
+			
+			         <text id='rot_cat' fill='#263238'
+			
+			          xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='14' letter-spacing='0em'>
+			
+			            <tspan x='81' y='44.3413'>Vs Ano Anterior</tspan>
+			         </text>
+			
+			         <text id='rot_dados'
+			          opacity='0.5' fill='"&vCor&"' fill-opacity='0.89' xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='17' font-weight='bold' letter-spacing='0em'>
+			            <tspan x='82' y='27.3447'>    "&vValor_Formatado&"    </tspan>
+			         </text>
+			
+			         <text id='seta' 
+			         
+			         opacity='0.5' fill='"&vCor&"' xml:space='preserve' style='white-space: pre' font-family='Scheherazade' font-size='20' font-weight='bold' letter-spacing='0em'>
+			            <tspan x='42' y='37.1770'>   "&vSeta&"    </tspan>
+			         </text>
+			      </g>
+			   </g>
+			   <defs>
+			      <clipPath id='clip0_29108_274'>
+			         <rect width='180' height='50' rx='5' fill='white'/>
+			      </clipPath>
+			   </defs>
+			</svg>"
+			```
+		displayFolder: 4. Auxiliares
+		lineageTag: 75873316-3f7e-47e7-8fe0-5b1a030a2590
+
+	measure 'Cont. Prod. Estoque' = COUNTROWS(dproduto)
+		formatString: 0
+		displayFolder: 1. Principais
+		lineageTag: cd0ac25f-d4d5-4724-9868-a7c7abe58540
+
+	measure 'Nº de fornecedores' = DISTINCTCOUNT(fvendas[fornecedor_id])
+		formatString: 0
+		displayFolder: 1. Principais
+		lineageTag: f2429739-b3a3-47f6-bdac-844402553e51
+
+	measure 'Receita liquida Formatado' =
+			
+			VAR vValor = [Receita liquida]
+			RETURN
+			SWITCH(
+			    true(),
+			    vValor >= 1000000000, FORMAT(vValor,"0,0,,,.0 B"),
+			    vValor >= 1000000., FORMAT(vValor, "0,0,,.0 M"),
+			    vValor >= 1000., FORMAT(vValor, "0,0,.0 k"),
+			    FORMAT(vValor, "0")
+			)
+		displayFolder: 1. Principais
+		lineageTag: 2108ac33-3c8a-4ac2-a659-a0ae8fea9694
+
+	measure '% Receita Fornecedor' =
+			
+			DIVIDE(
+			    [Receita Bruta],
+			    CALCULATE(
+			        [Receita Bruta],
+			        ALL(dfornecedor)
+			    )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 1. Principais
+		lineageTag: 4429321a-89cb-4012-bf55-654f78899109
+
+	measure 'Classificação Fornecedor' =
+			
+			SWITCH(
+			    TRUE(),
+			    [% Receita Fornecedor] >= 0.20 && [Margem %] >= 0.25, "Estratégico",
+			    [% Receita Fornecedor] >= 0.20 && [Margem %] < 0.25, "Negociação",
+			    [% Receita Fornecedor] < 0.20 && [Margem %] >= 0.25, "Oportunidade",
+			    "Baixa Prioridade"
+			)
+		displayFolder: 1. Principais
+		lineageTag: c39df532-a34c-4e7d-baa0-a5dc40340d51
+
+	partition _Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+

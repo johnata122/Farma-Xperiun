@@ -1,0 +1,127 @@
+table fvendas
+	lineageTag: dd601e0d-1137-4df3-85bd-1f2625a6dc77
+
+	column venda_id
+		dataType: double
+		lineageTag: 08089843-5b5a-438b-a7f8-c2bfb6b65325
+		summarizeBy: sum
+		sourceColumn: venda_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 967c628e-3f01-44fb-8dd2-a55902ca09a0
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora
+		dataType: double
+		lineageTag: 3f3a416e-fa2d-469b-9e38-70f22aea760b
+		summarizeBy: sum
+		sourceColumn: hora
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column turno_id
+		dataType: double
+		lineageTag: de0c1cd2-01d2-48e2-8d11-68bbc5655158
+		summarizeBy: none
+		sourceColumn: turno_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column produto_id
+		dataType: double
+		lineageTag: d2a0ec7a-de78-4140-b41d-23f13b2c20b9
+		summarizeBy: none
+		sourceColumn: produto_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fornecedor_id
+		dataType: double
+		lineageTag: b1d9b333-8cb5-42b7-92c4-1671be937d5d
+		summarizeBy: none
+		sourceColumn: fornecedor_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column quantidade
+		dataType: double
+		lineageTag: 4fc7f0ca-9d61-46b8-b05c-86ad4546017b
+		summarizeBy: sum
+		sourceColumn: quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column preco_unitario
+		dataType: double
+		lineageTag: 5c669b49-a2df-4958-a78b-33508bc42678
+		summarizeBy: sum
+		sourceColumn: preco_unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column desconto
+		dataType: double
+		lineageTag: dbc6fb83-161e-472b-8aed-16c92709b4d2
+		summarizeBy: sum
+		sourceColumn: desconto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column custo_total
+		dataType: double
+		lineageTag: 1134c262-1ef4-4bf0-a953-61739fdba9b2
+		summarizeBy: sum
+		sourceColumn: custo_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column forma_pagamento
+		dataType: string
+		lineageTag: eb24b77b-800a-459d-a651-6e7a4e6c6c3d
+		summarizeBy: none
+		sourceColumn: forma_pagamento
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fvendas = m
+		mode: import
+		source =
+				let
+				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
+				    f_vendas_Table = Fonte{[Name="f_vendas",Kind="Table"]}[Data],
+				    #"Outras Colunas Removidas" = Table.SelectColumns(f_vendas_Table,{"venda_id", "data", "hora", "turno_id", "produto_id", "fornecedor_id", "quantidade", "preco_unitario", "desconto", "custo_total", "forma_pagamento"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Outras Colunas Removidas",{{"data", type date}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

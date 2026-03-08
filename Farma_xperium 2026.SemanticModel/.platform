@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Farma_xperium 2026"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "99c92489-32bf-4264-85ae-17a567dc19ff"
+  }
+}
