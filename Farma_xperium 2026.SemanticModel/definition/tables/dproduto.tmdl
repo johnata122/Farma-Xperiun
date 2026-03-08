@@ -93,16 +93,16 @@ table dproduto
 
 	partition dproduto = m
 		mode: import
+		queryGroup: Dimensoes
 		source =
 				let
-				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
-				    d_produto_Table = Fonte{[Name="d_produto",Kind="Table"]}[Data],
-				    #"Outras Colunas Removidas" = Table.SelectColumns(d_produto_Table,{"produto_id", "nome_produto", "codigo_atc", "categoria", "grupo_terapeutico", "preco_unitario", "custo_unitario", "margem_percentual", "exige_receita"}),
-				    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Outras Colunas Removidas", "Personalizar", each if [exige_receita] = 0 then "Não" else if [exige_receita] = 1 then "Sim" else null),
-				    #"Colunas Renomeadas" = Table.RenameColumns(#"Coluna Condicional Adicionada",{{"Personalizar", "Med. controlados"}}),
-				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"Med. controlados", type text}})
+				    Fonte = Database{[Name="d_produto",Kind="Table"]}[Data],
+				    SelectCols = Table.SelectColumns(Fonte,{"produto_id", "nome_produto", "codigo_atc", "categoria", "grupo_terapeutico", "preco_unitario", "custo_unitario", "margem_percentual", "exige_receita"}),
+				    AddCol = Table.AddColumn(SelectCols, "Personalizar", each if [exige_receita] = 0 then "Não" else if [exige_receita] = 1 then "Sim" else null),
+				    RenameCols = Table.RenameColumns(AddCol,{{"Personalizar", "Med. controlados"}}),
+				    Tipar = Table.TransformColumnTypes(RenameCols,{{"Med. controlados", type text}})
 				in
-				    #"Tipo Alterado"
+				    Tipar
 
 	annotation PBI_NavigationStepName = Navegação
 

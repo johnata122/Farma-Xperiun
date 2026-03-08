@@ -1,12 +1,14 @@
 table _Medidas
 	lineageTag: 99bf2a32-4bef-42a3-8b0c-3cffffc4f212
 
+	/// Calcula o custo total das vendas
 	measure 'Custo Total' = SUM(fvendas[custo_total])
 		displayFolder: 1. Principais
 		lineageTag: 9a5b3095-d98e-4aa2-98f5-5880e434a6d3
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Calcula o lucro total obtido
 	measure 'Lucro T.' = [Receita liquida]-[Custo Total]
 		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		displayFolder: 1. Principais
@@ -14,11 +16,13 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
+	/// Contagem distinta do total de vendas realizadas
 	measure 'Qtde Vendas' = DISTINCTCOUNT(fvendas[venda_id])
 		formatString: #,0.000
 		displayFolder: 1. Principais
 		lineageTag: 1f264c56-e794-46fd-8056-223a5c7eb819
 
+	/// receita total dos produtos vendidos
 	measure 'Receita Bruta' = sumx(fvendas,fvendas[quantidade]*fvendas[preco_unitario])
 		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		displayFolder: 1. Principais
@@ -26,12 +30,14 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
+	/// Receita total menos os descontos de vendas
 	measure 'Receita liquida' = [Receita Bruta]-sumx(fvendas,fvendas[desconto])
 		displayFolder: 1. Principais
 		lineageTag: 3d09827e-b0dc-422f-b870-d0bd1abcbf78
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// receita bruta dividido pela quantidade de vendas
 	measure 'Ticket Médio' = DIVIDE([Receita Bruta],DISTINCTCOUNT(fvendas[venda_id]),0)
 		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
 		displayFolder: 1. Principais
@@ -39,32 +45,37 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
+	/// Calcula a margem de lucro obtida
 	measure 'Margem %' = DIVIDE([Lucro T.], [Receita liquida],0)
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: 1. Principais
 		lineageTag: 125afb8e-ac7d-48e8-9866-a83956a60bf4
 
+	/// Receita estabelecida de volume de vendas
 	measure 'Meta da Receita' =
 			
 			CALCULATE(
-			    SUM(dmeta[meta_receita])
+			    SUM(fMetas[meta_receita])
 			)
 		displayFolder: 2. Metas
 		lineageTag: 648d724c-c6cb-419e-9ede-59c581e0fb45
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Meta da Qtde' = SUM(dmeta[meta_quantidade])
+	/// Qtde estabelecida de volume de vendas
+	measure 'Meta da Qtde' = SUM(fMetas[meta_quantidade])
 		displayFolder: 2. Metas
 		lineageTag: 0b5203de-254a-4730-951c-0f410b7b377b
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// percentual da receita alcançado em relação a meta estabelecida
 	measure 'Atingimento % Meta Rec.' = DIVIDE([Receita liquida],[Meta da Receita - Fix],0)
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: 1. Principais
 		lineageTag: 30bb39be-bb1b-45eb-b59b-c92b9fcecda1
 
+	/// Formata o faturamento em unidade de medida (milhares, milhões e bilhões)
 	measure 'Faturamento Bruto Formatado' =
 			
 			VAR vValor = [Receita Bruta]
@@ -79,6 +90,7 @@ table _Medidas
 		displayFolder: 1. Principais
 		lineageTag: 286184b8-b643-4019-9d22-0af6bc796e8e
 
+	/// variação de receita percentual em relação ao mesmo periodo do ano anterior
 	measure 'YOY Receita bruta %' = ```
 			
 			VAR Valor_last_year = [Receita Bruta LY]
@@ -93,6 +105,7 @@ table _Medidas
 		displayFolder: 3. Temporais
 		lineageTag: 3e50e6a3-9e62-400b-8a05-d7706199b424
 
+	/// retorna imagem para o kpi de receita bruta
 	measure 'imagem Var Receita Bruta' = ```
 			
 			
@@ -150,30 +163,34 @@ table _Medidas
 		displayFolder: 4. Auxiliares
 		lineageTag: 40550cf2-6c8e-4a55-8c94-3039d8b5b514
 
+	/// Receita obtida no mesmo periodo do ano anterior
 	measure 'Receita Bruta LY' = CALCULATE([Receita Bruta],SAMEPERIODLASTYEAR(dcalendario[data]))
 		displayFolder: 3. Temporais
 		lineageTag: 807b8f89-08b7-4c24-b664-cae9e134e0bf
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Calcula a meta do mes selecionado pelos filtros
 	measure 'Meta da Receita - Fix' =
 			
 			VAR MesAnoSelecionado = SELECTEDVALUE(dcalendario[AnoMes])
 			RETURN
 			CALCULATE(
-			     SUM(dmeta[meta_receita]),
-			      dmeta[AnoMes] = MesAnoSelecionado)
+			     SUM(fMetas[meta_receita]),
+			      fMetas[AnoMes] = MesAnoSelecionado)
 		displayFolder: 2. Metas
 		lineageTag: 104b163d-0f3f-44a0-a633-0abe48ffd3b0
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Receita liquida obtida no mesmo periodo do ano anterior
 	measure 'Receita Liquida LY' = CALCULATE([Receita liquida],SAMEPERIODLASTYEAR(dcalendario[data]))
 		displayFolder: 3. Temporais
 		lineageTag: f0c0069f-16f7-4722-92d5-8fc62391d4d0
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// variação de receita liquida percentual em relação ao mesmo periodo do ano anterior
 	measure 'YOY Receita Liquida %' = ```
 			
 			VAR Valor_last_year = [Receita Liquida LY]
@@ -188,12 +205,14 @@ table _Medidas
 		displayFolder: 3. Temporais
 		lineageTag: b6e42954-e934-42fc-aa31-e9564a03b539
 
+	/// Lucro obtido no mesmo periodo do ano anterior.
 	measure 'Lucro Total LY' = CALCULATE([Lucro T.],SAMEPERIODLASTYEAR(dcalendario[data]))
 		displayFolder: 3. Temporais
 		lineageTag: 30c1f44c-355d-4ed7-a4b3-5d1d71cb2de5
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// variação de lucro percentual em relação ao mesmo periodo do ano anterior
 	measure 'YOY Lucro Total %' = ```
 			
 			VAR Valor_last_year = [Lucro Total LY]
@@ -209,11 +228,13 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Quantidade vendida no mesmo periodo do ano anterior
 	measure 'Qtde Vendas LY' = CALCULATE([Qtde Vendas],SAMEPERIODLASTYEAR(dcalendario[data]))
 		formatString: 0
 		displayFolder: 3. Temporais
 		lineageTag: 3899a9c3-b5e0-449e-93cc-4024fc3d124f
 
+	/// variação de qtd vendida em relação ao mesmo periodo do ano anterior
 	measure 'YOY Qtde Vendas %' = ```
 			
 			VAR Valor_last_year = [Qtde Vendas LY]
@@ -229,6 +250,7 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// retorna imagem para o kpi de receita liquida
 	measure 'imagem Var Receita Liquida' = ```
 			
 			
@@ -286,6 +308,7 @@ table _Medidas
 		displayFolder: 4. Auxiliares
 		lineageTag: 330dadb7-3155-4eff-9a73-1b9f96df92be
 
+	/// retorna imagem para o kpi de lucro total
 	measure 'imagem Var Lucro Total' = ```
 			
 			
@@ -343,6 +366,7 @@ table _Medidas
 		displayFolder: 4. Auxiliares
 		lineageTag: 671bd1b2-c441-4964-b9f3-7a3b35622369
 
+	/// retorna imagem para o kpi de quantidade de vendas
 	measure 'imagem Var Qtde de Vendas Total' = ```
 			
 			
@@ -400,6 +424,7 @@ table _Medidas
 		displayFolder: 4. Auxiliares
 		lineageTag: 649f8680-cb83-4ac7-a265-833402090779
 
+	/// Contagem dos meses da meta alcançada
 	measure 'Meses Meta Batida' = ```
 			
 			COUNTROWS(
@@ -416,17 +441,20 @@ table _Medidas
 		displayFolder: 2. Metas
 		lineageTag: 73a375d6-a8aa-4ba6-9916-f9cc56b698fd
 
+	/// delta da receita em relação a meta
 	measure 'Variância Absoluta' = [Receita Bruta] - [Meta da Receita]
 		displayFolder: 2. Metas
 		lineageTag: cc576877-798a-4b43-a1bc-56c38c593dcb
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// percentual de variação da receita em relação a meta
 	measure 'Variância %' = DIVIDE([Variância Absoluta], [Meta da Receita], 0)
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: 2. Metas
 		lineageTag: 620b6f99-0d8f-4ed7-b273-ed56472f3c8c
 
+	/// Receita acumulada ao longo do ano
 	measure 'Receita YTD' =
 			
 			TOTALYTD(
@@ -438,6 +466,7 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Total acumulado da meta anual
 	measure 'Meta YTD' =
 			
 			TOTALYTD(
@@ -449,6 +478,7 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Total acumulado da meta estabelecida
 	measure 'Atingimento YTD %' =
 			
 			DIVIDE([Receita YTD], [Meta YTD])
@@ -457,12 +487,14 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// Ticket medio obtido no mesmo periodo do ano anterior
 	measure 'Ticket Médio LY' = CALCULATE([Ticket Médio],SAMEPERIODLASTYEAR(dcalendario[data]))
 		displayFolder: 3. Temporais
 		lineageTag: 3957e673-8323-42cd-8dfe-024bf116ade7
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// variação de ticket medio em relação ao mesmo periodo do ano anterior
 	measure 'YOY Ticket Médio %' = ```
 			
 			VAR Valor_last_year = [Ticket Médio LY]
@@ -478,6 +510,7 @@ table _Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	/// retorna imagem para o kpi de variação ano sobre ano do ticket medio
 	measure 'imagem Var YoY T.M Total' = ```
 			
 			
@@ -535,16 +568,19 @@ table _Medidas
 		displayFolder: 4. Auxiliares
 		lineageTag: 75873316-3f7e-47e7-8fe0-5b1a030a2590
 
+	/// Conta o portfolio total de produtos que a empresa possui
 	measure 'Cont. Prod. Estoque' = COUNTROWS(dproduto)
 		formatString: 0
 		displayFolder: 1. Principais
 		lineageTag: cd0ac25f-d4d5-4724-9868-a7c7abe58540
 
+	/// conta quantidade de fornecedores disponíveis
 	measure 'Nº de fornecedores' = DISTINCTCOUNT(fvendas[fornecedor_id])
 		formatString: 0
 		displayFolder: 1. Principais
 		lineageTag: f2429739-b3a3-47f6-bdac-844402553e51
 
+	/// formatação semântica da receita líquida
 	measure 'Receita liquida Formatado' =
 			
 			VAR vValor = [Receita liquida]
@@ -559,6 +595,7 @@ table _Medidas
 		displayFolder: 1. Principais
 		lineageTag: 2108ac33-3c8a-4ac2-a659-a0ae8fea9694
 
+	/// Calcula ao percentual da receita bruta do fornecedor sobre o total realizado das vendas
 	measure '% Receita Fornecedor' =
 			
 			DIVIDE(
@@ -572,6 +609,7 @@ table _Medidas
 		displayFolder: 1. Principais
 		lineageTag: 4429321a-89cb-4012-bf55-654f78899109
 
+	/// Classifica quais fornecedores representam maior importância para o negócio em grau de prioridades avaliados pela margem de lucro.
 	measure 'Classificação Fornecedor' =
 			
 			SWITCH(

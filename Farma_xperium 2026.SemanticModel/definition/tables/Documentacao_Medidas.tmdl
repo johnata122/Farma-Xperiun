@@ -1,0 +1,45 @@
+table Documentacao_Medidas
+	lineageTag: c5f0e9e3-9e0f-4c34-9f6d-759c7e2ba53e
+
+	column Medida
+		lineageTag: 9f480f00-736a-48c6-bb72-b26b95a9f248
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Medida]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descrição
+		lineageTag: 88e245a1-ff24-4fee-89b6-df42d202ca99
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Descrição]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pasta
+		lineageTag: 7a612ee6-00f3-4703-b4a5-7832e4554227
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Pasta]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Documentacao_Medidas = calculated
+		mode: import
+		source =
+				
+				VAR Tabela_Medidas = INFO.VIEW.MEASURES()
+				
+				VAR SelectCols =
+				SELECTCOLUMNS(
+				    Tabela_Medidas,
+				    "Medida", [Name],
+				    "Descrição", [Description],
+				    "Pasta", [DisplayFolder]
+				    )
+				
+				RETURN SelectCols
+
+	annotation PBI_Id = 243d02affa184377ab7965edf63c5765
+

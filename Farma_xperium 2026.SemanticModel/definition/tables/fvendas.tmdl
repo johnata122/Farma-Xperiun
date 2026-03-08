@@ -1,19 +1,9 @@
 table fvendas
 	lineageTag: dd601e0d-1137-4df3-85bd-1f2625a6dc77
 
-	column venda_id
-		dataType: double
-		lineageTag: 08089843-5b5a-438b-a7f8-c2bfb6b65325
-		summarizeBy: sum
-		sourceColumn: venda_id
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column data
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: 967c628e-3f01-44fb-8dd2-a55902ca09a0
 		summarizeBy: none
 		sourceColumn: data
@@ -110,16 +100,25 @@ table fvendas
 
 		annotation SummarizationSetBy = Automatic
 
+	column venda_id
+		dataType: double
+		lineageTag: f76fea71-8105-409e-8785-f4b33a7d4c5b
+		summarizeBy: sum
+		sourceColumn: venda_id
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition fvendas = m
 		mode: import
+		queryGroup: Fatos
 		source =
 				let
-				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
-				    f_vendas_Table = Fonte{[Name="f_vendas",Kind="Table"]}[Data],
-				    #"Outras Colunas Removidas" = Table.SelectColumns(f_vendas_Table,{"venda_id", "data", "hora", "turno_id", "produto_id", "fornecedor_id", "quantidade", "preco_unitario", "desconto", "custo_total", "forma_pagamento"}),
-				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Outras Colunas Removidas",{{"data", type date}})
+				    Fonte = Database{[Name="vw_vendas",Kind="View"]}[Data],
+				    Tipar = Table.TransformColumnTypes(Fonte,{{"data", type date}})
 				in
-				    #"Tipo Alterado"
+				    Tipar
 
 	annotation PBI_NavigationStepName = Navegação
 

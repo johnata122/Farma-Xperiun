@@ -55,13 +55,13 @@ table dfornecedor
 
 	partition dfornecedor = m
 		mode: import
+		queryGroup: Dimensoes
 		source =
 				let
-				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
-				    d_fornecedor_Table = Fonte{[Name="d_fornecedor",Kind="Table"]}[Data],
-				    #"Outras Colunas Removidas" = Table.SelectColumns(d_fornecedor_Table,{"fornecedor_id", "nome", "cidade", "estado", "regiao", "prazo_entrega_dias"})
+				    Fonte = Database{[Name="d_fornecedor",Kind="Table"]}[Data],
+				    SeelectCols = Table.SelectColumns(Fonte,{"fornecedor_id", "nome", "cidade", "estado", "regiao", "prazo_entrega_dias"})
 				in
-				    #"Outras Colunas Removidas"
+				    SeelectCols
 
 	annotation PBI_NavigationStepName = Navegação
 

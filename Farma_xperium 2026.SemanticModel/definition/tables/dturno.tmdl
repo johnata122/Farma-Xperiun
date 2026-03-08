@@ -41,13 +41,13 @@ table dturno
 
 	partition dturno = m
 		mode: import
+		queryGroup: Dimensoes
 		source =
 				let
-				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
-				    d_turno_Table = Fonte{[Name="d_turno",Kind="Table"]}[Data],
-				    #"Outras Colunas Removidas" = Table.SelectColumns(d_turno_Table,{"turno_id", "nome_turno", "hora_inicio", "hora_fim"})
+				    Fonte = Database{[Name="d_turno",Kind="Table"]}[Data],
+				    SelectCols = Table.SelectColumns(Fonte,{"turno_id", "nome_turno", "hora_inicio", "hora_fim"})
 				in
-				    #"Outras Colunas Removidas"
+				    SelectCols
 
 	annotation PBI_NavigationStepName = Navegação
 

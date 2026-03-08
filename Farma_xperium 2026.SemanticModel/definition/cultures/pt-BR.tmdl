@@ -8,7 +8,7 @@ cultureInfo pt-BR
 			    "dmeta": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "dmeta"
+			          "ConceptualEntity": "fMetas"
 			        }
 			      },
 			      "State": "Generated",
@@ -23,7 +23,7 @@ cultureInfo pt-BR
 			    "dmeta.data": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "dmeta",
+			          "ConceptualEntity": "fMetas",
 			          "ConceptualProperty": "data"
 			        }
 			      },
@@ -109,7 +109,7 @@ cultureInfo pt-BR
 			    "dmeta.meta_receita": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "dmeta",
+			          "ConceptualEntity": "fMetas",
 			          "ConceptualProperty": "meta_receita"
 			        }
 			      },
@@ -132,7 +132,7 @@ cultureInfo pt-BR
 			    "dmeta.meta_quantidade": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "dmeta",
+			          "ConceptualEntity": "fMetas",
 			          "ConceptualProperty": "meta_quantidade"
 			        }
 			      },
@@ -1077,75 +1077,6 @@ cultureInfo pt-BR
 			        {
 			          "fvenda": {
 			            "State": "Generated"
-			          }
-			        }
-			      ]
-			    },
-			    "fvenda.venda_id": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "fvendas",
-			          "ConceptualProperty": "venda_id"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "venda id": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "venda_id": {
-			            "Type": "Noun",
-			            "State": "Generated",
-			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "venda": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "venda identification": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "venda identity": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "venda identifier": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "venda credential": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.727
 			          }
 			        }
 			      ]
@@ -2362,7 +2293,7 @@ cultureInfo pt-BR
 			    "dmeta.ano_me": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "dmeta",
+			          "ConceptualEntity": "fMetas",
 			          "ConceptualProperty": "AnoMes"
 			        }
 			      },
@@ -4251,7 +4182,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_entity__medida_atingimento_YTD_": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -4317,7 +4248,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_entity__medida_meta_YTD": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -4482,7 +4413,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_entity__medida_variância_": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -4548,7 +4479,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_entity__medida_variância_absoluta": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -4911,7 +4842,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_entity__medida_meta_da_receita__fix": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -5076,7 +5007,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_ano_me": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -5208,7 +5139,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_entity__medida_atingimento__meta_rec_": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -5241,7 +5172,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_entity__medida_meta_da_qtde": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -5274,7 +5205,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_entity__medida_meta_da_receita": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -6759,7 +6690,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_meta_quantidade": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -6792,7 +6723,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_meta_receita": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -6825,7 +6756,7 @@ cultureInfo pt-BR
 			    },
 			    "dmeta_has_data": {
 			      "Binding": {
-			        "ConceptualEntity": "dmeta"
+			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {

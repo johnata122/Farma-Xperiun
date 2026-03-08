@@ -6,13 +6,25 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
+queryGroup Parametros
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Fatos
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Dimensoes
+
+	annotation PBI_QueryGroupOrder = 2
+
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["dmeta","dcalendario","dfornecedor","dproduto","dturno","fvendas","_Medidas"]
+annotation PBI_QueryOrder = ["Pasta","Database","fMetas","dcalendario","dfornecedor","dproduto","dturno","fvendas","_Medidas"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
-ref table dmeta
+ref table fMetas
 ref table dcalendario
 ref table dfornecedor
 ref table dproduto
@@ -23,6 +35,7 @@ ref table DateTableTemplate_b0c330b0-4c03-4cd8-b2e6-f2d0434660ea
 ref table LocalDateTable_f22bf9dc-db5a-4128-91e5-e49a1348d657
 ref table Parâmetro
 ref table 'Parâmetro 2'
+ref table Documentacao_Medidas
 
 ref cultureInfo pt-BR
 

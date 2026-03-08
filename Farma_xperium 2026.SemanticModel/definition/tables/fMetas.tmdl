@@ -1,4 +1,4 @@
-table dmeta
+table fMetas
 	lineageTag: 481002f3-f1de-4d8c-a1d0-ce8f4d9eba4c
 
 	column data
@@ -29,21 +29,21 @@ table dmeta
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column AnoMes = (YEAR(dmeta[data]) * 100) + MONTH(dmeta[data])
+	column AnoMes = (YEAR(fMetas[data]) * 100) + MONTH(fMetas[data])
 		formatString: 0
 		lineageTag: 1bf6e674-7b56-4f64-b714-bdebfe7a7bb2
 		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 
-	partition dmeta = m
+	partition fMetas = m
 		mode: import
+		queryGroup: Fatos
 		source =
 				let
-				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
-				    vw_meta_View = Fonte{[Name="vw_meta",Kind="View"]}[Data]
+				    Fonte = Database{[Name="vw_meta",Kind="View"]}[Data]
 				in
-				    vw_meta_View
+				    Fonte
 
 	annotation PBI_NavigationStepName = Navegação
 

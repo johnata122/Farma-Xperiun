@@ -1,0 +1,21 @@
+expression Pasta = "G:\Meu Drive\Data Challenges MBA\Desafio 03\Base\farma_xperiun.db" meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+	lineageTag: 94644a14-bd46-4624-a51f-c7fba7bd49a8
+	queryGroup: Parametros
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Text
+
+expression Database =
+		let
+		    Fonte = "driver={SQLite3 ODBC Driver};database=" & Pasta & ";dsn=SQLite3 Datasource",
+		    Personalizar1 = Odbc.DataSource(Fonte, [HierarchicalNavigation=true])
+		in
+		    Personalizar1
+	lineageTag: 53f524e7-9982-4507-9cd1-19a07698f965
+	queryGroup: Parametros
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -131,16 +131,16 @@ table dcalendario
 
 	partition dcalendario = m
 		mode: import
+		queryGroup: Dimensoes
 		source =
 				let
-				    Fonte = Odbc.DataSource("driver={SQLite3 ODBC Driver};database=C:\Users\Claudio\Desktop\3º Projeto MBA - Datachallenger\documentação projeto\Base\farma_xperiun.db;dsn=SQLite3 Datasource", [HierarchicalNavigation=true]),
-				    d_calendario_Table = Fonte{[Name="d_calendario",Kind="Table"]}[Data],
-				    #"Tipo Alterado" = Table.TransformColumnTypes(d_calendario_Table,{{"data", type date}}),
-				    #"Primeiros Caracteres Inseridos" = Table.AddColumn(#"Tipo Alterado", "Mês Abrev.", each Text.Start([nome_mes], 3), type text),
-				    #"Linhas Filtradas" = Table.SelectRows(#"Primeiros Caracteres Inseridos", each true),
-				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Linhas Filtradas",{"data", "ano", "mes", "nome_mes", "trimestre", "semestre", "dia_semana", "nome_dia_semana", "is_fim_semana", "is_feriado", "Mês Abrev."})
+				    Fonte = Database{[Name="d_calendario",Kind="Table"]}[Data],
+				    Tipar = Table.TransformColumnTypes(Fonte,{{"data", type date}}),
+				    AddCol1 = Table.AddColumn(Tipar, "Mês Abrev.", each Text.Start([nome_mes], 3), type text),
+				    Filtro = Table.SelectRows(AddCol1, each true),
+				    SelectCols = Table.SelectColumns(Filtro,{"data", "ano", "mes", "nome_mes", "trimestre", "semestre", "dia_semana", "nome_dia_semana", "is_fim_semana", "is_feriado", "Mês Abrev."})
 				in
-				    #"Outras Colunas Removidas"
+				    SelectCols
 
 	annotation PBI_NavigationStepName = Navegação
 
