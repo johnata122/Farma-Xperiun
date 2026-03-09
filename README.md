@@ -99,7 +99,7 @@ Abaixo estão detalhadas as principais medidas criadas no Power BI para suportar
 | % Receita Fornecedor | Calcula ao percentual da receita bruta do fornecedor sobre o total realizado das vendas | 1. Principais |
 | Classificação Fornecedor | Classifica quais fornecedores representam maior importância para o negócio em grau de prioridades avaliados pela margem de lucro. | 1. Principais |
 
-[Matriz Semântica com mais informações consultar o arquivo .pbip](./Farma_xperium 2026.pbip)
+[Para mais informações sobre os cálculos detalhados, consulte o arquivo .pbip](<Farma_xperium 2026.pbip>)
 
 ## 🚀 Como Usar
 
