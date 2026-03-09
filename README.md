@@ -28,7 +28,7 @@ O objetivo principal desta análise é consolidar os indicadores-chave de perfor
 * Existem **tendências ou sazonalidades** nas vendas que podem ser exploradas?
 * Quais são as **fornecedores** que contribuem com o melhor resultado de margem de lucro para o negócio?
 
-[Ver Apresentação Corporativa](./Dash%20Olist%20Store/apresentacao_corporativa.pdf)
+[Ver Apresentação Corporativa](./Apresentacao_Executiva.pdf)
 
 [Ver Análise Exploratória](./SQL_Farma.docx)
 
