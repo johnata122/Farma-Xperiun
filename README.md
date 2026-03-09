@@ -50,8 +50,8 @@ Liste todas as ferramentas, linguagens e plataformas que você usou no projeto.
 
 Detalhe de onde os dados foram extraídos. Se for um projeto público, forneça links para os datasets.
 
-* **Banco de Dados:** Conexão com o banco de dados `Olist Store` no SQLITE. **[Faça o download do banco de dados aqui](https://drive.google.com/drive/folders/1cjAWmwH7B3N8d3wRfYLQzDhZIJ4XfOjE?hl=pt-br)**.
-* **Views:** Criadas no Banco de dados para serem consumidas pelo Modelo Semântico. ([código-fonte das queries aqui](./Dash%20Olist%20Store/Queries))
+* **Banco de Dados:** Conexão com o banco de dados `farma_xperiun` no SQLITE. **[Faça o download do banco de dados aqui](https://drive.google.com/drive/folders/1cjAWmwH7B3N8d3wRfYLQzDhZIJ4XfOjE?hl=pt-br)**.
+* **Views:** Criadas no Banco de dados para serem consumidas pelo Modelo Semântico. ([código-fonte das queries aqui](./Queries))
 [Documentação do Banco de dados](./documentacao_farma_xperiun.docx)
 
 ## 🧮 Principais Métricas e Cálculos (DAX)
@@ -136,7 +136,7 @@ Pronto! O relatório será atualizado automaticamente, conectando-se ao arquivo 
 
 1.  Faça um "Fork" do projeto.
 2.  Crie uma nova "Branch" (`git checkout -b feature/nova-analise`).
-3.  Faça o "Commit" de suas mudanças (`git commit -m 'Adiciona nova análise de churn'`).
+3.  Faça o "Commit" de suas mudanças (`git commit -m 'Adiciona nova análise'`).
 4.  Faça o "Push" para a "Branch" (`git push origin feature/nova-analise`).
 5.  Abra um "Pull Request".
 
