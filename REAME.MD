@@ -13,9 +13,6 @@
 * [Tecnologias Utilizadas](#🛠️-tecnologias-utilizadas)
 * [Arquitetura da Solução](#🏗️-arquitetura-da-solução)
 * [Fonte de Dados](#📊-fonte-de-dados)
-* [Modelo de Dados](#📈-modelo-de-dados)
-* [Relacionamentos](#🔗-relacionamentos)
-* [Metadados](#🔖-metadados)
 * [Principais Métricas e Cálculos](#🧮-principais-métricas-e-cálculos)
 * [Como Usar](#🚀-como-usar)
 * [Como Contribuir](#🤝-como-contribuir)
@@ -33,7 +30,7 @@ O objetivo principal desta análise é consolidar os indicadores-chave de perfor
 
 [Ver Apresentação Corporativa](./Dash%20Olist%20Store/apresentacao_corporativa.pdf)
 
-[Ver Análise Exploratória](./Dash%20Olist%20Store/analise_exploratoria.pdf)
+[Ver Análise Exploratória](./SQL_Farma.docx)
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -116,7 +113,7 @@ Abaixo estão detalhadas as principais medidas criadas no Power BI para suportar
     * **Passo 1: Clonar o Repositório**
         Clone este repositório para a sua máquina local usando o comando:
         ```bash
-        git clone git clone https://github.com/johnata122/Farma-Xperiun
+        git clone https://github.com/johnata122/Farma-Xperiun
         ```
 
     * **Passo 2: Baixar o Banco de Dados**
@@ -126,7 +123,7 @@ Abaixo estão detalhadas as principais medidas criadas no Power BI para suportar
         1.  Abra a pasta do projeto clonado e dê um duplo clique no arquivo `.pbip` para abrir o projeto no Power BI Desktop.
         2.  No Power BI, vá para a guia **Página Inicial** e clique em **Transformar dados**.
         3.  Na janela do Power Query que se abrir, no painel esquerdo, localize e selecione o parâmetro chamado **`CaminhoArquivo`**.
-        4.  No campo **Valor Atual**, cole o caminho completo de onde você salvou o arquivo `farma_xperiun.db`. Por exemplo: `C:\Projetos\BI\farma_xperiun.db`.
+        4.  No campo **Pasta**, cole o caminho completo de onde você salvou o arquivo `farma_xperiun.db`. Por exemplo: `C:\Projetos\BI\farma_xperiun.db`.
         5.  Clique em **Fechar e Aplicar** no canto superior esquerdo.
 
 Pronto! O relatório será atualizado automaticamente, conectando-se ao arquivo local do banco de dados.

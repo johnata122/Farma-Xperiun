@@ -42,7 +42,8 @@
   "publicCustomVisuals": [
     "Tachometer1474636471549",
     "pureVizInfographicC9801BF222134D2D83FA9C41861F3482",
-    "googleMapsPbiVisual2982D2C8868A4D07BE77AE3D0F9F87C3"
+    "googleMapsPbiVisual2982D2C8868A4D07BE77AE3D0F9F87C3",
+    "PBI_CV_25997FEB_F466_44FA_B562_AC4063283C4C"
   ],
   "resourcePackages": [
     {
@@ -78,6 +79,16 @@
         {
           "name": "BG_Farma_xperiun_-_Pg_019098981543394059.svg",
           "path": "BG_Farma_xperiun_-_Pg_019098981543394059.svg",
+          "type": "Image"
+        },
+        {
+          "name": "Home_-_Farma515961322993213.svg",
+          "path": "Home_-_Farma515961322993213.svg",
+          "type": "Image"
+        },
+        {
+          "name": "Frame_1096601498320700072.svg",
+          "path": "Frame_1096601498320700072.svg",
           "type": "Image"
         }
       ]

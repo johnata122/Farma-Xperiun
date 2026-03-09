@@ -5,7 +5,7 @@ cultureInfo pt-BR
 			  "Version": "4.1.0",
 			  "Language": "en-US",
 			  "Entities": {
-			    "dmeta": {
+			    "f_meta": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "fMetas"
@@ -14,13 +14,20 @@ cultureInfo pt-BR
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "dmeta": {
+			          "f meta": {
 			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "fMetas": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
 			          }
 			        }
 			      ]
 			    },
-			    "dmeta.data": {
+			    "f_meta.data": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "fMetas",
@@ -106,7 +113,7 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta.meta_receita": {
+			    "f_meta.meta_receita": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "fMetas",
@@ -129,7 +136,7 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta.meta_quantidade": {
+			    "f_meta.meta_quantidade": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "fMetas",
@@ -1506,6 +1513,16 @@ cultureInfo pt-BR
 			            "State": "Generated",
 			            "Weight": 0.99
 			          }
+			        },
+			        {
+			          "Pagamento": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -2290,7 +2307,7 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta.ano_me": {
+			    "f_meta.ano_me": {
 			      "Definition": {
 			        "Binding": {
 			          "ConceptualEntity": "fMetas",
@@ -2545,6 +2562,16 @@ cultureInfo pt-BR
 			        {
 			          "receita liquida LY": {
 			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Rec. Liq. LY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -3346,9 +3373,214 @@ cultureInfo pt-BR
 			          }
 			        }
 			      ]
+			    },
+			    "fvenda.venda_id": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fvendas",
+			          "ConceptualProperty": "venda_id"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "venda id": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "venda_id": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "venda": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "venda identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "venda identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "venda identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "venda credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "documentacao_medida": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Documentacao_Medidas"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "documentacao medida": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Documentacao_Medidas": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "documentacao_medida.medida": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Documentacao_Medidas",
+			          "ConceptualProperty": "Medida"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "medida": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "documentacao_medida.descrição": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Documentacao_Medidas",
+			          "ConceptualProperty": "Descrição"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "descrição": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "documentacao_medida.pasta": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Documentacao_Medidas",
+			          "ConceptualProperty": "Pasta"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "pasta": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
+			    "dcalendario_data_trimestre_has_dcalendario_data_mê": {
+			      "Binding": {
+			        "ConceptualEntity": "dcalendario"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dcalendario.data.trimestre": {
+			          "Target": {
+			            "Entity": "dcalendario.data.trimestre"
+			          }
+			        },
+			        "dcalendario.data.mê": {
+			          "Target": {
+			            "Entity": "dcalendario.data.mê"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dcalendario.data.trimestre"
+			            },
+			            "Object": {
+			              "Role": "dcalendario.data.mê"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "trimestres_have_mê"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dcalendario.data.mê"
+			            },
+			            "Object": {
+			              "Role": "dcalendario.data.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "mê_have_trimestres"
+			        },
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "dcalendario.data.mê"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "dcalendario.data.trimestre"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "mê_are_in_trimestres"
+			        }
+			      ]
+			    },
 			    "dcalendario_data_ano_has_dcalendario_data_trimestre": {
 			      "Binding": {
 			        "ConceptualEntity": "dcalendario"
@@ -3771,6 +4003,138 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
+			    "documentacao_medida_has_pasta": {
+			      "Binding": {
+			        "ConceptualEntity": "Documentacao_Medidas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "documentacao_medida": {
+			          "Target": {
+			            "Entity": "documentacao_medida"
+			          }
+			        },
+			        "documentacao_medida.pasta": {
+			          "Target": {
+			            "Entity": "documentacao_medida.pasta"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "documentacao_medida"
+			            },
+			            "Object": {
+			              "Role": "documentacao_medida.pasta"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "documentacao_medidas_have_pastas"
+			        }
+			      ]
+			    },
+			    "documentacao_medida_has_descrição": {
+			      "Binding": {
+			        "ConceptualEntity": "Documentacao_Medidas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "documentacao_medida": {
+			          "Target": {
+			            "Entity": "documentacao_medida"
+			          }
+			        },
+			        "documentacao_medida.descrição": {
+			          "Target": {
+			            "Entity": "documentacao_medida.descrição"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "documentacao_medida"
+			            },
+			            "Object": {
+			              "Role": "documentacao_medida.descrição"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "documentacao_medidas_have_descriçãos"
+			        }
+			      ]
+			    },
+			    "documentacao_medida_has_medida": {
+			      "Binding": {
+			        "ConceptualEntity": "Documentacao_Medidas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "documentacao_medida": {
+			          "Target": {
+			            "Entity": "documentacao_medida"
+			          }
+			        },
+			        "documentacao_medida.medida": {
+			          "Target": {
+			            "Entity": "documentacao_medida.medida"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "documentacao_medida"
+			            },
+			            "Object": {
+			              "Role": "documentacao_medida.medida"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "documentacao_medidas_have_medidas"
+			        }
+			      ]
+			    },
+			    "fvenda_has_venda_id": {
+			      "Binding": {
+			        "ConceptualEntity": "fvendas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "fvenda": {
+			          "Target": {
+			            "Entity": "fvenda"
+			          }
+			        },
+			        "fvenda.venda_id": {
+			          "Target": {
+			            "Entity": "fvenda.venda_id"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "fvenda"
+			            },
+			            "Object": {
+			              "Role": "fvenda.venda_id"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fvendas_have_venda_ids"
+			        }
+			      ]
+			    },
 			    "fvenda_has_entity__medida_classificação_fornecedor": {
 			      "Binding": {
 			        "ConceptualEntity": "fvendas"
@@ -4180,15 +4544,15 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta_has_entity__medida_atingimento_YTD_": {
+			    "f_meta_has_entity__medida_atingimento_YTD_": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
 			        "entity__medida.atingimento_YTD_": {
@@ -4201,7 +4565,7 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
 			              "Role": "entity__medida.atingimento_YTD_"
@@ -4209,7 +4573,7 @@ cultureInfo pt-BR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_atingimento_YTD_"
+			          "ID": "f_meta_have_atingimento_YTD_"
 			        }
 			      ]
 			    },
@@ -4246,15 +4610,15 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta_has_entity__medida_meta_YTD": {
+			    "f_meta_has_entity__medida_meta_YTD": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
 			        "entity__medida.meta_YTD": {
@@ -4267,7 +4631,7 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
 			              "Role": "entity__medida.meta_YTD"
@@ -4275,7 +4639,7 @@ cultureInfo pt-BR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_meta_YTD"
+			          "ID": "f_meta_have_meta_YTD"
 			        }
 			      ]
 			    },
@@ -4411,15 +4775,15 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta_has_entity__medida_variância_": {
+			    "f_meta_has_entity__medida_variância_": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
 			        "entity__medida.variância_": {
@@ -4432,7 +4796,7 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
 			              "Role": "entity__medida.variância_"
@@ -4440,7 +4804,7 @@ cultureInfo pt-BR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_variância_"
+			          "ID": "f_meta_have_variância_"
 			        }
 			      ]
 			    },
@@ -4477,15 +4841,15 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta_has_entity__medida_variância_absoluta": {
+			    "f_meta_has_entity__medida_variância_absoluta": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
 			        "entity__medida.variância_absoluta": {
@@ -4498,7 +4862,7 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
 			              "Role": "entity__medida.variância_absoluta"
@@ -4506,7 +4870,7 @@ cultureInfo pt-BR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_variância_absoluta"
+			          "ID": "f_meta_have_variância_absoluta"
 			        }
 			      ]
 			    },
@@ -4840,15 +5204,15 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta_has_entity__medida_meta_da_receita__fix": {
+			    "f_meta_has_entity__medida_meta_da_receita__fix": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
 			        "entity__medida.meta_da_receita__fix": {
@@ -4861,7 +5225,7 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
 			              "Role": "entity__medida.meta_da_receita__fix"
@@ -4869,7 +5233,7 @@ cultureInfo pt-BR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_meta_da_receita__fix"
+			          "ID": "f_meta_have_meta_da_receita__fix"
 			        }
 			      ]
 			    },
@@ -5005,20 +5369,20 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta_has_ano_me": {
+			    "f_meta_has_ano_me": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
-			        "dmeta.ano_me": {
+			        "f_meta.ano_me": {
 			          "Target": {
-			            "Entity": "dmeta.ano_me"
+			            "Entity": "f_meta.ano_me"
 			          }
 			        }
 			      },
@@ -5026,15 +5390,15 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
-			              "Role": "dmeta.ano_me"
+			              "Role": "f_meta.ano_me"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_ano_me"
+			          "ID": "f_meta_have_ano_me"
 			        }
 			      ]
 			    },
@@ -5137,15 +5501,15 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta_has_entity__medida_atingimento__meta_rec_": {
+			    "f_meta_has_entity__medida_atingimento__meta_rec_": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
 			        "entity__medida.atingimento__meta_rec_": {
@@ -5158,7 +5522,7 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
 			              "Role": "entity__medida.atingimento__meta_rec_"
@@ -5166,19 +5530,19 @@ cultureInfo pt-BR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_atingimento__meta_rec_"
+			          "ID": "f_meta_have_atingimento__meta_rec_"
 			        }
 			      ]
 			    },
-			    "dmeta_has_entity__medida_meta_da_qtde": {
+			    "f_meta_has_entity__medida_meta_da_qtde": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
 			        "entity__medida.meta_da_qtde": {
@@ -5191,7 +5555,7 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
 			              "Role": "entity__medida.meta_da_qtde"
@@ -5199,19 +5563,19 @@ cultureInfo pt-BR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_meta_da_qtde"
+			          "ID": "f_meta_have_meta_da_qtde"
 			        }
 			      ]
 			    },
-			    "dmeta_has_entity__medida_meta_da_receita": {
+			    "f_meta_has_entity__medida_meta_da_receita": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
 			        "entity__medida.meta_da_receita": {
@@ -5224,7 +5588,7 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
 			              "Role": "entity__medida.meta_da_receita"
@@ -5232,7 +5596,7 @@ cultureInfo pt-BR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_meta_da_receita"
+			          "ID": "f_meta_have_meta_da_receita"
 			        }
 			      ]
 			    },
@@ -5695,39 +6059,6 @@ cultureInfo pt-BR
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "fvendas_have_data"
-			        }
-			      ]
-			    },
-			    "fvenda_has_venda_id": {
-			      "Binding": {
-			        "ConceptualEntity": "fvendas"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "fvenda": {
-			          "Target": {
-			            "Entity": "fvenda"
-			          }
-			        },
-			        "fvenda.venda_id": {
-			          "Target": {
-			            "Entity": "fvenda.venda_id"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "fvenda"
-			            },
-			            "Object": {
-			              "Role": "fvenda.venda_id"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fvendas_have_venda_ids"
 			        }
 			      ]
 			    },
@@ -6688,20 +7019,20 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "dmeta_has_meta_quantidade": {
+			    "f_meta_has_meta_quantidade": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
-			        "dmeta.meta_quantidade": {
+			        "f_meta.meta_quantidade": {
 			          "Target": {
-			            "Entity": "dmeta.meta_quantidade"
+			            "Entity": "f_meta.meta_quantidade"
 			          }
 			        }
 			      },
@@ -6709,32 +7040,32 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
-			              "Role": "dmeta.meta_quantidade"
+			              "Role": "f_meta.meta_quantidade"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_meta_quantidades"
+			          "ID": "f_meta_have_meta_quantidades"
 			        }
 			      ]
 			    },
-			    "dmeta_has_meta_receita": {
+			    "f_meta_has_meta_receita": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
-			        "dmeta.meta_receita": {
+			        "f_meta.meta_receita": {
 			          "Target": {
-			            "Entity": "dmeta.meta_receita"
+			            "Entity": "f_meta.meta_receita"
 			          }
 			        }
 			      },
@@ -6742,65 +7073,32 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dmeta"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
-			              "Role": "dmeta.meta_receita"
+			              "Role": "f_meta.meta_receita"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "dmetas_have_meta_receitas"
+			          "ID": "f_meta_have_meta_receitas"
 			        }
 			      ]
 			    },
-			    "dmeta_has_data": {
+			    "f_meta_has_data": {
 			      "Binding": {
 			        "ConceptualEntity": "fMetas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "dmeta": {
+			        "f_meta": {
 			          "Target": {
-			            "Entity": "dmeta"
+			            "Entity": "f_meta"
 			          }
 			        },
-			        "dmeta.data": {
+			        "f_meta.data": {
 			          "Target": {
-			            "Entity": "dmeta.data"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dmeta"
-			            },
-			            "Object": {
-			              "Role": "dmeta.data"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "dmetas_have_data"
-			        }
-			      ]
-			    },
-			    "dcalendario_data_trimestre_has_dcalendario_data_mê": {
-			      "Binding": {
-			        "ConceptualEntity": "dcalendario"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dcalendario.data.trimestre": {
-			          "Target": {
-			            "Entity": "dcalendario.data.trimestre"
-			          }
-			        },
-			        "dcalendario.data.mê": {
-			          "Target": {
-			            "Entity": "dcalendario.data.mê"
+			            "Entity": "f_meta.data"
 			          }
 			        }
 			      },
@@ -6808,48 +7106,15 @@ cultureInfo pt-BR
 			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "dcalendario.data.trimestre"
+			              "Role": "f_meta"
 			            },
 			            "Object": {
-			              "Role": "dcalendario.data.mê"
+			              "Role": "f_meta.data"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "trimestres_have_mê"
-			        },
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dcalendario.data.mê"
-			            },
-			            "Object": {
-			              "Role": "dcalendario.data.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "mê_have_trimestres"
-			        },
-			        {
-			          "Preposition": {
-			            "Subject": {
-			              "Role": "dcalendario.data.mê"
-			            },
-			            "Prepositions": [
-			              {
-			                "in": {
-			                  "State": "Generated"
-			                }
-			              }
-			            ],
-			            "Object": {
-			              "Role": "dcalendario.data.trimestre"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "mê_are_in_trimestres"
+			          "ID": "f_meta_have_data"
 			        }
 			      ]
 			    },
