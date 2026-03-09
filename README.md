@@ -122,7 +122,7 @@ Abaixo estão detalhadas as principais medidas criadas no Power BI para suportar
     * **Passo 3: Configurar a Conexão no Power BI**
         1.  Abra a pasta do projeto clonado e dê um duplo clique no arquivo `.pbip` para abrir o projeto no Power BI Desktop.
         2.  No Power BI, vá para a guia **Página Inicial** e clique em **Transformar dados**.
-        3.  Na janela do Power Query que se abrir, no painel esquerdo, localize e selecione o parâmetro chamado **`CaminhoArquivo`**.
+        3.  Na janela do Power Query que se abrir, no painel esquerdo, localize e selecione o parâmetro chamado **`Pasta`**.
         4.  No campo **Pasta**, cole o caminho completo de onde você salvou o arquivo `farma_xperiun.db`. Por exemplo: `C:\Projetos\BI\farma_xperiun.db`.
         5.  Clique em **Fechar e Aplicar** no canto superior esquerdo.
 
