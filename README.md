@@ -117,7 +117,7 @@ Abaixo estão detalhadas as principais medidas criadas no Power BI para suportar
         ```
 
     * **Passo 2: Baixar o Banco de Dados**
-        Faça o download do banco de dados `olist.sqlite` através **[deste link](https://drive.google.com/file/d/1j1aiG7q_YLcitpsqA7PcwdKl7j3wBBfV/view?usp=drive_link)** e salve-o em uma pasta de fácil acesso no seu computador (por exemplo: `C:\Projetos\BI`).
+        Faça o download do banco de dados `farma_xperiun.db` através **[deste link](https://drive.google.com/file/d/1j1aiG7q_YLcitpsqA7PcwdKl7j3wBBfV/view?usp=drive_link)** e salve-o em uma pasta de fácil acesso no seu computador (por exemplo: `C:\Projetos\BI`).
 
     * **Passo 3: Configurar a Conexão no Power BI**
         1.  Abra a pasta do projeto clonado e dê um duplo clique no arquivo `.pbip` para abrir o projeto no Power BI Desktop.
